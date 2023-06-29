@@ -11,23 +11,17 @@ namespace StudentAttandance.classes
         public int ClassID { get; set; }
         public string RoomNumber { get; set; }
         public string Major { get; set; }
-        public int S1 { get; set; }
-        public int S2 { get; set; }
-        public int S3 { get; set; }
-        public int S4 { get; set; }
-        public int S5 { get; set; }
+        public Nullable<int>[] Subjects { get; set; }
         public string StuShift { get; set; }
 
-        public Classes(int classID, string roomNumber, string major, int s1, int s2, int s3, int s4, int s5, string stuShift)
+        public Classes(int classID, string roomNumber, string major, Nullable<int> s1, Nullable<int> s2, Nullable<int> s3, Nullable<int> s4, Nullable<int> s5, string stuShift)
         {
+            Subjects = new Nullable<int>[5] {
+                s1, s2, s3, s4, s5
+            };
             ClassID = classID;
             RoomNumber = roomNumber;
             Major = major;
-            S1 = s1;
-            S2 = s2;
-            S3 = s3;
-            S4 = s4;
-            S5 = s5;
             StuShift = stuShift;
         }
 

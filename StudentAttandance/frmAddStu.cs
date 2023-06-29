@@ -17,22 +17,23 @@ namespace StudentAttandance
 {
     public partial class frmAddStudent : Form
     {
-        SQLConnection conn = new SQLConnection(StudentAttandance.Properties.Settings.Default.SATTConnectionString);
+        SQLConnection conn = new SQLConnection(StudentAttandance.Properties.Settings.Default.SATTConnectionString1);
         List<Classes> classes = new List<Classes>();
-
+        List<Classes> fClasses = new List<Classes>();
+        List<string> Major = new List<string>();
+        List<string> Shift = new List<string>();
         public frmAddStudent()
         {
             InitializeComponent();
-           
+            cbMajor.Items.Add("");
+            cbShift.Items.Add("");
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'sattDataSet1.Students' table. You can move, or remove it, as needed.
-            this.studentsTableAdapter.Fill(this.sattDataSet1.Students);
-            // TODO: This line of code loads data into the 'sattDataSet1.Classes' table. You can move, or remove it, as needed.
-            this.classesTableAdapter.Fill(this.sattDataSet1.Classes);
-            loadClassId();
+            loadClassDB();
+            loadClassMajor();
+            
         }
         //events
         private void ADDbtn_Click(object sender, EventArgs e)
@@ -43,9 +44,70 @@ namespace StudentAttandance
         }
 
         //functions to be called
+        //load from classes to input
+        private void loadClasses(List<Classes> filteredClasses)
+        {
+            cbClasses.Items.Clear();
+            cbClasses.DisplayMember = "RoomNumber";
+            cbClasses.ValueMember = "classId";
+            foreach(Classes c in filteredClasses)
+            {
+                cbClasses.Items.Add(c);
+            }
+            if (cbClasses.Items.Count > 1)
+            {
+                cbClasses.Enabled = true;
+            }
+            else
+            {
+                cbClasses.SelectedIndex = 0;
+                cbClasses.Enabled = false;
+            }
+        }
 
+        private void loadClassShift(List<Classes> filteredClasses)
+        {
+            Shift.Clear();
+            cbShift.Items.Clear();
+
+            foreach(Classes c in filteredClasses) {
+                if (!Shift.Contains(c.StuShift))
+                {
+                    cbShift.Items.Add(c.StuShift);
+                    Shift.Add(c.StuShift);
+                }
+            }
+            if(cbShift.Items.Count > 1) {
+                Debug.Print("asdsa");
+                cbShift.Enabled = true;
+            }
+            else
+            {
+                cbShift.SelectedIndex = 0;
+                cbShift.Enabled = false;
+            }
+        }
+
+        private void loadClassMajor()
+        {
+            Major.Clear();
+            cbMajor.Items.Clear();
+            foreach (Classes c in classes)
+            {
+
+                if (!Major.Contains(c.Major))
+                {
+                    cbMajor.Items.Add(c.Major);
+                    Major.Add(c.Major);
+                }
+
+            }
+
+        }
+
+      
         //load from db
-        private void loadClassId()
+        private void loadClassDB()
         {
             string sql = "SELECT * FROM Classes";
             SqlCommand sqlCommand = new SqlCommand(sql);
@@ -62,14 +124,16 @@ namespace StudentAttandance
                     Convert.ToInt32(dataReader["S3"]),
                     Convert.ToInt32(dataReader["S4"]),
                     Convert.ToInt32(dataReader["S5"]),
-                    dataReader["StuShift"].ToString());
+                    dataReader["StudyShift"].ToString());
 
                 // Add the class object to the list.
                 classes.Add(class1);
             }
+            
             conn.close();
         }
 
+        //for student
         private void AddStu()
         {
            
@@ -92,7 +156,7 @@ namespace StudentAttandance
             MessageBox.Show(count.ToString());
 
         }
-
+        //get stu age
         private int getAge()
         {
             DateTime today = DateTime.Today;
@@ -101,5 +165,55 @@ namespace StudentAttandance
             return age;
         }
 
+        //classes event
+
+        private void cbMajor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbMajor.SelectedIndex > -1)
+            {
+                fClasses.Clear();
+                foreach(Classes c in classes)
+                {
+                    if (c.Major == cbMajor.Text) fClasses.Add(c);
+                }
+                loadClassShift(fClasses);
+            }
+            else
+            {
+               cbShift.Items.Clear();
+               cbShift.Enabled = false;
+
+            }
+        }
+
+        private void cbShift_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<Classes> sClasses = new List<Classes>();
+            if( cbShift.SelectedIndex > -1)
+            {
+                foreach(Classes c in fClasses)
+                {
+
+                   if (c.StuShift != cbShift.Text) sClasses.Add(c);
+
+                }
+
+                loadClasses(sClasses);
+            }
+            else
+            {
+                loadClasses(fClasses);
+            }
+        }
+
+        private void cbClasses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          if(cbClasses.SelectedIndex > 0)
+            {
+                
+            }
+        }
+
+  
     }
 }

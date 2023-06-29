@@ -54,11 +54,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="classes\Classes.cs" />
+    <Compile Include="classes\Subjects.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddClasses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddClasses.Designer.cs">
+      <DependentUpon>frmAddClasses.cs</DependentUpon>
     </Compile>
     <Compile Include="frmAddStu.cs">
       <SubType>Form</SubType>
@@ -66,20 +73,32 @@
     <Compile Include="frmAddStu.Designer.cs">
       <DependentUpon>frmAddStu.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAddSubject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddSubject.Designer.cs">
+      <DependentUpon>frmAddSubject.cs</DependentUpon>
+    </Compile>
     <Compile Include="functions\dbConnection.cs" />
     <Compile Include="functions\validations.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SATTDataSet.Designer.cs">
+    <Compile Include="SATTDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SATTDataSet.xsd</DependentUpon>
+      <DependentUpon>SATTDataSet1.xsd</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAddClasses.resx">
+      <DependentUpon>frmAddClasses.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAddStu.resx">
       <DependentUpon>frmAddStu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddSubject.resx">
+      <DependentUpon>frmAddSubject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -100,16 +119,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="SATTDataSet.xsc">
-      <DependentUpon>SATTDataSet.xsd</DependentUpon>
+    <None Include="SATTDataSet1.xsc">
+      <DependentUpon>SATTDataSet1.xsd</DependentUpon>
     </None>
-    <None Include="SATTDataSet.xsd">
+    <None Include="SATTDataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SATTDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>SATTDataSet1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="SATTDataSet.xss">
-      <DependentUpon>SATTDataSet.xsd</DependentUpon>
+    <None Include="SATTDataSet1.xss">
+      <DependentUpon>SATTDataSet1.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
