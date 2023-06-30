@@ -19,12 +19,12 @@ D:\temp\School\CSharp\StudentAttandance\StudentAttandance\bin\Debug\FontAwesome.
 D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.csproj.AssemblyReference.cache
 D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.csproj.SuggestedBindingRedirects.cache
 D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.Form1.resources
+D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.frmAddClasses.resources
 D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.frmAddStudent.resources
+D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.frmAddSubject.resources
 D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.Properties.Resources.resources
 D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.csproj.GenerateResource.cache
 D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.csproj.CoreCompileInputs.cache
 D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.csproj.CopyComplete
 D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.exe
 D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.pdb
-D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.frmAddClasses.resources
-D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.frmAddSubject.resources

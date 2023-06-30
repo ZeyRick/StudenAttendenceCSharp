@@ -17,6 +17,7 @@ namespace StudentAttandance
     {
         SQLConnection conn = new SQLConnection(StudentAttandance.Properties.Settings.Default.SATTConnectionString);
         List<Subjects> subjects = new List<Subjects>();
+        bool isEditing = false;
         public frmAddSubject()
         {
             InitializeComponent();
@@ -24,6 +25,8 @@ namespace StudentAttandance
 
         private void frmAddSubject_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'sATTDataSet.Subjects' table. You can move, or remove it, as needed.
+            this.subjectsTableAdapter.Fill(this.sATTDataSet.Subjects);
             loadSubjectDB();
             loadSubjectID();
             load_Teacher_SubjectName();
@@ -55,16 +58,24 @@ namespace StudentAttandance
         {
             string subjectName = cbSubjectName.Text.Trim();
             string teacher = cbTeacher.Text.Trim();
-            foreach (Subjects subject in subjects)
+            string sql;
+            if (!isEditing)
             {
-                if(subject.SubjectName.Equals(subjectName) && subject.Teacher.Equals(teacher))
+                foreach (Subjects subject in subjects)
                 {
-                    MessageBox.Show("Teacher already teaching that subject");
-                    return;
+                    if (subject.SubjectName.Equals(subjectName) && subject.Teacher.Equals(teacher))
+                    {
+                        MessageBox.Show("Teacher already teaching that subject");
+                        return;
+                    }
                 }
+                sql = "INSERT INTO Subjects(SubjectName, Teacher) VALUES(@subjectname, @teacher)";
             }
-            string sql = "INSERT INTO Subjects(SubjectName, Teacher) VALUES(@subjectname, @teacher)";
+            
+            else sql = "UPDATE Subjects SET SubjectName=@subjectname, Teacher=@teacher WHERE SubjectID=@subID";
+
             SqlCommand sqlCommand = new SqlCommand(sql);
+            if(isEditing) sqlCommand.Parameters.AddWithValue("@subID", tbID.Text.Trim());
             sqlCommand.Parameters.AddWithValue("@subjectname", subjectName);
             sqlCommand.Parameters.AddWithValue("@teacher", teacher);
             int count = conn.ExeNonQueryCmd(sqlCommand);
@@ -116,6 +127,51 @@ namespace StudentAttandance
             loadSubjectDB();
             loadSubjectID();
             load_Teacher_SubjectName();
+            this.subjectsTableAdapter.Fill(this.sATTDataSet.Subjects);
+        }
+
+        private void subjectsBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.subjectsBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.sATTDataSet);
+
+        }
+
+        private void subjectsDataGridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            enableUpdate();
+
+        }
+
+        //small function for update
+        private void enableUpdate()
+        {
+
+            btnAdd.Text = "Update";
+            btnCancel.Visible = true;
+            btnCancel.Enabled = true;
+            isEditing = true;
+
+            string id = subjectsDataGridView.SelectedRows[0].Cells[0].Value.ToString().Trim();
+            string subjectName = subjectsDataGridView.SelectedRows[0].Cells[1].Value.ToString().Trim();
+            string teacher = subjectsDataGridView.SelectedRows[0].Cells[2].Value.ToString().Trim();
+            tbID.Text = id;
+            cbSubjectName.Text = subjectName;
+            cbTeacher.Text = teacher;
+        }
+        private void cancelUpdate()
+        {
+            btnAdd.Text = "Add";
+            btnCancel.Visible = false;
+            isEditing = false;
+
+            ValidationsClass.ClearInputs(panel1);
+            loadSubjectID();
+        }
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            cancelUpdate();
         }
     }
 }
