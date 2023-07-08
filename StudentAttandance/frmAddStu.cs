@@ -193,7 +193,7 @@ namespace StudentAttandance
             conn.close();
         }
 
-        //for student
+        //for add student
         private void AddStu()
         {
             string sql;

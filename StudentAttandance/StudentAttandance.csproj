@@ -53,6 +53,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classes\AttStatus.cs" />
     <Compile Include="classes\Classes.cs" />
     <Compile Include="classes\Students.cs" />
     <Compile Include="classes\Subjects.cs" />
