@@ -30,11 +30,9 @@
         {
             this.panelSidebar = new System.Windows.Forms.Panel();
             this.btnAddSub = new FontAwesome.Sharp.IconButton();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
-            this.AddStudentSidebarbtn = new FontAwesome.Sharp.IconButton();
             this.DataListBtnSIdeControl = new FontAwesome.Sharp.IconButton();
-            this.iconButton3 = new FontAwesome.Sharp.IconButton();
-            this.iconButton2 = new FontAwesome.Sharp.IconButton();
+            this.btnClasses = new FontAwesome.Sharp.IconButton();
+            this.btnAttendance = new FontAwesome.Sharp.IconButton();
             this.Home = new FontAwesome.Sharp.IconButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,6 +42,7 @@
             this.Minimizebtn = new FontAwesome.Sharp.IconButton();
             this.FullScreenbtn = new FontAwesome.Sharp.IconButton();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.btnStudent = new FontAwesome.Sharp.IconButton();
             this.panelSidebar.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panelHeader.SuspendLayout();
@@ -52,12 +51,11 @@
             // panelSidebar
             // 
             this.panelSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(97)))), ((int)(((byte)(97)))));
+            this.panelSidebar.Controls.Add(this.btnStudent);
             this.panelSidebar.Controls.Add(this.btnAddSub);
-            this.panelSidebar.Controls.Add(this.iconButton1);
-            this.panelSidebar.Controls.Add(this.AddStudentSidebarbtn);
             this.panelSidebar.Controls.Add(this.DataListBtnSIdeControl);
-            this.panelSidebar.Controls.Add(this.iconButton3);
-            this.panelSidebar.Controls.Add(this.iconButton2);
+            this.panelSidebar.Controls.Add(this.btnClasses);
+            this.panelSidebar.Controls.Add(this.btnAttendance);
             this.panelSidebar.Controls.Add(this.Home);
             this.panelSidebar.Controls.Add(this.panel4);
             this.panelSidebar.Dock = System.Windows.Forms.DockStyle.Left;
@@ -78,7 +76,7 @@
             this.btnAddSub.IconChar = FontAwesome.Sharp.IconChar.CircleInfo;
             this.btnAddSub.IconColor = System.Drawing.Color.Black;
             this.btnAddSub.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnAddSub.Location = new System.Drawing.Point(0, 420);
+            this.btnAddSub.Location = new System.Drawing.Point(0, 312);
             this.btnAddSub.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddSub.Name = "btnAddSub";
             this.btnAddSub.Size = new System.Drawing.Size(212, 54);
@@ -87,42 +85,6 @@
             this.btnAddSub.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddSub.UseVisualStyleBackColor = true;
             this.btnAddSub.Click += new System.EventHandler(this.btnAddSub_Click);
-            // 
-            // iconButton1
-            // 
-            this.iconButton1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.iconButton1.FlatAppearance.BorderSize = 0;
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.CircleInfo;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.Location = new System.Drawing.Point(0, 366);
-            this.iconButton1.Margin = new System.Windows.Forms.Padding(2);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(212, 54);
-            this.iconButton1.TabIndex = 15;
-            this.iconButton1.Text = "Add Student";
-            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton1.UseVisualStyleBackColor = true;
-            // 
-            // AddStudentSidebarbtn
-            // 
-            this.AddStudentSidebarbtn.Dock = System.Windows.Forms.DockStyle.Top;
-            this.AddStudentSidebarbtn.FlatAppearance.BorderSize = 0;
-            this.AddStudentSidebarbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddStudentSidebarbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddStudentSidebarbtn.IconChar = FontAwesome.Sharp.IconChar.CircleInfo;
-            this.AddStudentSidebarbtn.IconColor = System.Drawing.Color.Black;
-            this.AddStudentSidebarbtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.AddStudentSidebarbtn.Location = new System.Drawing.Point(0, 312);
-            this.AddStudentSidebarbtn.Margin = new System.Windows.Forms.Padding(2);
-            this.AddStudentSidebarbtn.Name = "AddStudentSidebarbtn";
-            this.AddStudentSidebarbtn.Size = new System.Drawing.Size(212, 54);
-            this.AddStudentSidebarbtn.TabIndex = 14;
-            this.AddStudentSidebarbtn.Text = "Add Class";
-            this.AddStudentSidebarbtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.AddStudentSidebarbtn.UseVisualStyleBackColor = true;
             // 
             // DataListBtnSIdeControl
             // 
@@ -142,41 +104,43 @@
             this.DataListBtnSIdeControl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.DataListBtnSIdeControl.UseVisualStyleBackColor = true;
             // 
-            // iconButton3
+            // btnClasses
             // 
-            this.iconButton3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.iconButton3.FlatAppearance.BorderSize = 0;
-            this.iconButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton3.IconChar = FontAwesome.Sharp.IconChar.Restroom;
-            this.iconButton3.IconColor = System.Drawing.Color.Black;
-            this.iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton3.Location = new System.Drawing.Point(0, 200);
-            this.iconButton3.Margin = new System.Windows.Forms.Padding(2);
-            this.iconButton3.Name = "iconButton3";
-            this.iconButton3.Size = new System.Drawing.Size(212, 54);
-            this.iconButton3.TabIndex = 12;
-            this.iconButton3.Text = "Class";
-            this.iconButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton3.UseVisualStyleBackColor = true;
+            this.btnClasses.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnClasses.FlatAppearance.BorderSize = 0;
+            this.btnClasses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClasses.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClasses.IconChar = FontAwesome.Sharp.IconChar.Restroom;
+            this.btnClasses.IconColor = System.Drawing.Color.Black;
+            this.btnClasses.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnClasses.Location = new System.Drawing.Point(0, 200);
+            this.btnClasses.Margin = new System.Windows.Forms.Padding(2);
+            this.btnClasses.Name = "btnClasses";
+            this.btnClasses.Size = new System.Drawing.Size(212, 54);
+            this.btnClasses.TabIndex = 12;
+            this.btnClasses.Text = "Class";
+            this.btnClasses.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnClasses.UseVisualStyleBackColor = true;
+            this.btnClasses.Click += new System.EventHandler(this.btnClasses_Click);
             // 
-            // iconButton2
+            // btnAttendance
             // 
-            this.iconButton2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.iconButton2.FlatAppearance.BorderSize = 0;
-            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.PeopleLine;
-            this.iconButton2.IconColor = System.Drawing.Color.Black;
-            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton2.Location = new System.Drawing.Point(0, 146);
-            this.iconButton2.Margin = new System.Windows.Forms.Padding(2);
-            this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Size = new System.Drawing.Size(212, 54);
-            this.iconButton2.TabIndex = 11;
-            this.iconButton2.Text = "Attendance";
-            this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton2.UseVisualStyleBackColor = true;
+            this.btnAttendance.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAttendance.FlatAppearance.BorderSize = 0;
+            this.btnAttendance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAttendance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAttendance.IconChar = FontAwesome.Sharp.IconChar.PeopleLine;
+            this.btnAttendance.IconColor = System.Drawing.Color.Black;
+            this.btnAttendance.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnAttendance.Location = new System.Drawing.Point(0, 146);
+            this.btnAttendance.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAttendance.Name = "btnAttendance";
+            this.btnAttendance.Size = new System.Drawing.Size(212, 54);
+            this.btnAttendance.TabIndex = 11;
+            this.btnAttendance.Text = "Attendance";
+            this.btnAttendance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAttendance.UseVisualStyleBackColor = true;
+            this.btnAttendance.Click += new System.EventHandler(this.btnAttendance_Click);
             // 
             // Home
             // 
@@ -308,6 +272,7 @@
             this.FullScreenbtn.TabIndex = 9;
             this.FullScreenbtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.FullScreenbtn.UseVisualStyleBackColor = false;
+            this.FullScreenbtn.Click += new System.EventHandler(this.FullScreenbtn_Click);
             // 
             // panelMain
             // 
@@ -315,6 +280,25 @@
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(800, 512);
             this.panelMain.TabIndex = 3;
+            // 
+            // btnStudent
+            // 
+            this.btnStudent.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnStudent.FlatAppearance.BorderSize = 0;
+            this.btnStudent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStudent.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStudent.IconChar = FontAwesome.Sharp.IconChar.CircleInfo;
+            this.btnStudent.IconColor = System.Drawing.Color.Black;
+            this.btnStudent.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnStudent.Location = new System.Drawing.Point(0, 366);
+            this.btnStudent.Margin = new System.Windows.Forms.Padding(2);
+            this.btnStudent.Name = "btnStudent";
+            this.btnStudent.Size = new System.Drawing.Size(212, 54);
+            this.btnStudent.TabIndex = 17;
+            this.btnStudent.Text = "Students";
+            this.btnStudent.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnStudent.UseVisualStyleBackColor = true;
+            this.btnStudent.Click += new System.EventHandler(this.btnStudent_Click);
             // 
             // Form1
             // 
@@ -341,11 +325,9 @@
         private System.Windows.Forms.Panel panelSidebar;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label1;
-        private FontAwesome.Sharp.IconButton iconButton1;
-        private FontAwesome.Sharp.IconButton AddStudentSidebarbtn;
         private FontAwesome.Sharp.IconButton DataListBtnSIdeControl;
-        private FontAwesome.Sharp.IconButton iconButton3;
-        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton btnClasses;
+        private FontAwesome.Sharp.IconButton btnAttendance;
         private FontAwesome.Sharp.IconButton Home;
         private System.Windows.Forms.Panel panelHeader;
         private FontAwesome.Sharp.IconButton iconButton4;
@@ -354,6 +336,7 @@
         private FontAwesome.Sharp.IconButton FullScreenbtn;
         private FontAwesome.Sharp.IconButton btnAddSub;
         private System.Windows.Forms.Panel panelMain;
+        private FontAwesome.Sharp.IconButton btnStudent;
     }
 }
 

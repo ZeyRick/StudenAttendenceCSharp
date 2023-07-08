@@ -33,10 +33,6 @@ namespace StudentAttandance
 
         }
 
-        private void btnAddSub_Click(object sender, EventArgs e)
-        {
-            OpenChildform(new frmAddSubject());
-        }
 
         //functions oppen child form
         private Form activeForm = null;
@@ -54,8 +50,42 @@ namespace StudentAttandance
 
         private void Closebtn_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (MessageBox.Show("Do you want to exit the Application?", "confirm"
+               , MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
+        private void btnClasses_Click(object sender, EventArgs e)
+        {
+            OpenChildform(new frmAddClasses());
+        }
+
+        private void btnAddSub_Click(object sender, EventArgs e)
+        {
+            OpenChildform(new frmAddSubject());
+        }
+
+        private void btnStudent_Click(object sender, EventArgs e)
+        {
+            OpenChildform(new frmAddStudent());
+        }
+
+        private void btnAttendance_Click(object sender, EventArgs e)
+        {
+            OpenChildform(new frmAttendence());
+        }
+
+        private void FullScreenbtn_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Maximized;
+             
+
+            }
+            else this.WindowState = FormWindowState.Normal;
+        }
     }
 }
