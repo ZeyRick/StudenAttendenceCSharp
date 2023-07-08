@@ -28,3 +28,4 @@ D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttan
 D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.csproj.CopyComplete
 D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.exe
 D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.pdb
+D:\temp\School\CSharp\StudentAttandance\StudentAttandance\obj\Debug\StudentAttandance.frmAttendence.resources

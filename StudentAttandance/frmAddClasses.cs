@@ -20,6 +20,7 @@ namespace StudentAttandance
         SQLConnection conn = new SQLConnection(StudentAttandance.Properties.Settings.Default.SATTConnectionString);
         List<Classes> classes = new List<Classes>();
         List<Subjects> subjects = new List<Subjects>();
+        bool isEditing = false;
         public frmAddClasses()
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace StudentAttandance
 
         private void frmAddClasses_Load(object sender, EventArgs e)
         {
+            this.classesTableAdapter.Fill(this.sATTDataSet.Classes);
             loadClassDB();
             loadId();
             loadMajor();
@@ -42,7 +44,7 @@ namespace StudentAttandance
         private dynamic getSelectedSubject(ComboBox cbSubject, ComboBox cbTeacher)
         {
             if (cbSubject.SelectedIndex < 0) return DBNull.Value;
-            if (cbTeacher1.Items.Count == 1) {
+            if (cbTeacher.Items.Count == 1) {
                 Subjects s = (Subjects)cbSubject.SelectedItem;
                 return s.SubjectID;
             }
@@ -50,6 +52,7 @@ namespace StudentAttandance
             {
                 if(s.Teacher.Equals(cbTeacher.Text) && s.SubjectName.Equals(cbSubject.Text))
                 {
+                   
                     return s.SubjectID;
                 }
             }
@@ -57,7 +60,11 @@ namespace StudentAttandance
         }
         private void addClasses()
         {
-            string sql = "INSERT INTO Classes(RoomNumber, Major, S1, S2, S3, S4, S5, StudyShift) VALUES(@roomnumber, @major, @s1, @s2, @s3, @s4, @s5, @stushift)";
+            string sql;
+            if (isEditing)
+                sql = "UPDATE Classes SET RoomNumber=@roomnumber, Major=@major, S1=@s1, S2=@s2, S3=@s3, S4=@s4, S5=@s5, StudyShift=@stushift WHERE ClassID=@classId;";
+            else
+                sql = "INSERT INTO Classes(RoomNumber, Major, S1, S2, S3, S4, S5, StudyShift) VALUES(@roomnumber, @major, @s1, @s2, @s3, @s4, @s5, @stushift)";
             SqlCommand sqlCommand = new SqlCommand(sql);
             var s1 = getSelectedSubject(cbSub1,cbTeacher1);
             var s2 = getSelectedSubject(cbSub2, cbTeacher2);
@@ -72,9 +79,11 @@ namespace StudentAttandance
             sqlCommand.Parameters.AddWithValue("@s4", s4);
             sqlCommand.Parameters.AddWithValue("@s5", s5);
             sqlCommand.Parameters.AddWithValue("@stushift", cbShift.Text.Trim());
+            if (isEditing) sqlCommand.Parameters.AddWithValue("@classId", tbID.Text.Trim());
 
             int count = conn.ExeNonQueryCmd(sqlCommand);
             conn.close();
+            this.classesTableAdapter.Fill(this.sATTDataSet.Classes);
             MessageBox.Show("Affected Data :" + count + " Row");
         }
 
@@ -279,6 +288,71 @@ namespace StudentAttandance
         private void cbSub5_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadTeacherInput(cbTeacher5, (ComboBox)sender);
+        }
+
+        private void classesBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.classesBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.sATTDataSet);
+
+        }
+
+
+        //small function for update
+        private void enableUpdate()
+        {
+
+            btnAdd.Text = "Update";
+            btnCancel.Visible = true;
+            btnCancel.Enabled = true;
+            isEditing = true;
+
+            string classId = classesDataGridView.SelectedRows[0].Cells["ClassID"].Value.ToString().Trim();
+            string RoomNumber = classesDataGridView.SelectedRows[0].Cells["RoomNumber"].Value.ToString().Trim();
+            string Major = classesDataGridView.SelectedRows[0].Cells["Major"].Value.ToString().Trim();
+            string s1 = classesDataGridView.SelectedRows[0].Cells["S1"].Value.ToString().Trim();
+            string s2 = classesDataGridView.SelectedRows[0].Cells["S2"].Value.ToString().Trim();
+            string s3 = classesDataGridView.SelectedRows[0].Cells["S3"].Value.ToString().Trim();
+            string s4 = classesDataGridView.SelectedRows[0].Cells["S4"].Value.ToString().Trim();
+            string s5 = classesDataGridView.SelectedRows[0].Cells["S5"].Value.ToString().Trim();
+            string studyShift = classesDataGridView.SelectedRows[0].Cells["StudyShift"].Value.ToString().Trim();
+
+            tbID.Text = classId;
+            tbRoomNumber.Text = RoomNumber;
+            cbShift.Text = studyShift;
+            cbMajor.Text = Major;
+
+            foreach ( Subjects s in subjects)
+            {
+
+                if ( s.SubjectID.ToString() == s1) {  cbSub1.Text = s.SubjectName; cbTeacher1.Text = s.Teacher; }
+                if (s.SubjectID.ToString() == s2) {  cbSub2.Text = s.SubjectName; cbTeacher2.Text = s.Teacher; }
+                if (s.SubjectID.ToString() == s3) {  cbSub3.Text = s.SubjectName; cbTeacher3.Text = s.Teacher; }
+                if (s.SubjectID.ToString() == s4) {  cbSub4.Text = s.SubjectName; cbTeacher4.Text = s.Teacher; }
+                if (s.SubjectID.ToString() == s5) {  cbSub5.Text = s.SubjectName; cbTeacher5.Text = s.Teacher; }
+            }  
+
+
+        }
+        private void cancelUpdate()
+        {
+            btnAdd.Text = "Add";
+            btnCancel.Visible = false;
+            isEditing = false;
+
+            ValidationsClass.ClearInputs(panel1);
+            loadId();
+        }
+
+        private void classesDataGridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            enableUpdate();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            cancelUpdate();
         }
     }
 }

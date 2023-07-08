@@ -11,7 +11,7 @@ namespace StudentAttandance.functions
      public class SQLConnection
     {
 
-        private SqlConnection sqlConnection;
+        public SqlConnection sqlConnection;
 
         public SQLConnection(string connectionString)
         {

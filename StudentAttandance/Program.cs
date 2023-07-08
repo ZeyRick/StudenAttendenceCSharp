@@ -16,7 +16,7 @@ namespace StudentAttandance
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmAddSubject());
+            Application.Run(new frmAttendence());
         }
     }
 }

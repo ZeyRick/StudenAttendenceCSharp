@@ -1001,7 +1001,7 @@ namespace StudentAttandance {
                 this.columnMajor.AllowDBNull = false;
                 this.columnMajor.MaxLength = 20;
                 this.columnStudyShift.AllowDBNull = false;
-                this.columnStudyShift.MaxLength = 5;
+                this.columnStudyShift.MaxLength = 10;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1145,6 +1145,8 @@ namespace StudentAttandance {
             
             private global::System.Data.DataColumn columnClassID;
             
+            private global::System.Data.DataColumn columnDOB;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public StudentsDataTable() {
@@ -1220,6 +1222,14 @@ namespace StudentAttandance {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DOBColumn {
+                get {
+                    return this.columnDOB;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1255,14 +1265,15 @@ namespace StudentAttandance {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public StudentsRow AddStudentsRow(string StudentName, string Sex, string Age, ClassesRow parentClassesRowByStudents_fk0) {
+            public StudentsRow AddStudentsRow(string StudentName, string Sex, string Age, ClassesRow parentClassesRowByStudents_fk0, System.DateTime DOB) {
                 StudentsRow rowStudentsRow = ((StudentsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         StudentName,
                         Sex,
                         Age,
-                        null};
+                        null,
+                        DOB};
                 if ((parentClassesRowByStudents_fk0 != null)) {
                     columnValuesArray[4] = parentClassesRowByStudents_fk0[0];
                 }
@@ -1300,6 +1311,7 @@ namespace StudentAttandance {
                 this.columnSex = base.Columns["Sex"];
                 this.columnAge = base.Columns["Age"];
                 this.columnClassID = base.Columns["ClassID"];
+                this.columnDOB = base.Columns["DOB"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1315,6 +1327,8 @@ namespace StudentAttandance {
                 base.Columns.Add(this.columnAge);
                 this.columnClassID = new global::System.Data.DataColumn("ClassID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnClassID);
+                this.columnDOB = new global::System.Data.DataColumn("DOB", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDOB);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnStuID}, true));
                 this.columnStuID.AutoIncrement = true;
@@ -1330,6 +1344,7 @@ namespace StudentAttandance {
                 this.columnAge.AllowDBNull = false;
                 this.columnAge.MaxLength = 5;
                 this.columnClassID.AllowDBNull = false;
+                this.columnDOB.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2161,6 +2176,17 @@ namespace StudentAttandance {
                 }
                 set {
                     this[this.tableStudents.ClassIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.DateTime DOB {
+                get {
+                    return ((global::System.DateTime)(this[this.tableStudents.DOBColumn]));
+                }
+                set {
+                    this[this.tableStudents.DOBColumn] = value;
                 }
             }
             
@@ -3407,42 +3433,47 @@ SELECT ClassID, RoomNumber, Major, S1, S2, S3, S4, S5, StudyShift FROM Classes W
             tableMapping.ColumnMappings.Add("Sex", "Sex");
             tableMapping.ColumnMappings.Add("Age", "Age");
             tableMapping.ColumnMappings.Add("ClassID", "ClassID");
+            tableMapping.ColumnMappings.Add("DOB", "DOB");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Students] WHERE (([StuID] = @Original_StuID) AND ([StudentName" +
-                "] = @Original_StudentName) AND ([Sex] = @Original_Sex) AND ([Age] = @Original_Ag" +
-                "e) AND ([ClassID] = @Original_ClassID))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [Students] WHERE (([StuID] = @Original_StuID) AND ([StudentName] = @O" +
+                "riginal_StudentName) AND ([Sex] = @Original_Sex) AND ([Age] = @Original_Age) AND" +
+                " ([ClassID] = @Original_ClassID) AND ([DOB] = @Original_DOB))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StuID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StuID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StudentName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StudentName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Sex", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sex", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Age", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Age", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ClassID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ClassID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DOB", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOB", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Students] ([StudentName], [Sex], [Age], [ClassID]) VALUES (@St" +
-                "udentName, @Sex, @Age, @ClassID);\r\nSELECT StuID, StudentName, Sex, Age, ClassID " +
-                "FROM Students WHERE (StuID = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Students] ([StudentName], [Sex], [Age], [ClassID], [DOB]) VALUES (@S" +
+                "tudentName, @Sex, @Age, @ClassID, @DOB);\r\nSELECT StuID, StudentName, Sex, Age, C" +
+                "lassID, DOB FROM Students WHERE (StuID = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StudentName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StudentName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Sex", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sex", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Age", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Age", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ClassID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ClassID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DOB", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOB", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Students] SET [StudentName] = @StudentName, [Sex] = @Sex, [Age] = @Age, [ClassID] = @ClassID WHERE (([StuID] = @Original_StuID) AND ([StudentName] = @Original_StudentName) AND ([Sex] = @Original_Sex) AND ([Age] = @Original_Age) AND ([ClassID] = @Original_ClassID));
-SELECT StuID, StudentName, Sex, Age, ClassID FROM Students WHERE (StuID = @StuID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Students] SET [StudentName] = @StudentName, [Sex] = @Sex, [Age] = @Age, [ClassID] = @ClassID, [DOB] = @DOB WHERE (([StuID] = @Original_StuID) AND ([StudentName] = @Original_StudentName) AND ([Sex] = @Original_Sex) AND ([Age] = @Original_Age) AND ([ClassID] = @Original_ClassID) AND ([DOB] = @Original_DOB));
+SELECT StuID, StudentName, Sex, Age, ClassID, DOB FROM Students WHERE (StuID = @StuID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StudentName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StudentName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Sex", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sex", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Age", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Age", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ClassID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ClassID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DOB", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOB", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StuID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StuID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StudentName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StudentName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Sex", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sex", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Age", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Age", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ClassID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ClassID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DOB", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DOB", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StuID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "StuID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -3459,7 +3490,7 @@ SELECT StuID, StudentName, Sex, Age, ClassID FROM Students WHERE (StuID = @StuID
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT StuID, StudentName, Sex, Age, ClassID FROM dbo.Students";
+            this._commandCollection[0].CommandText = "SELECT StuID, StudentName, Sex, Age, ClassID, DOB FROM Students";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -3520,7 +3551,7 @@ SELECT StuID, StudentName, Sex, Age, ClassID FROM Students WHERE (StuID = @StuID
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_StuID, string Original_StudentName, string Original_Sex, string Original_Age, int Original_ClassID) {
+        public virtual int Delete(int Original_StuID, string Original_StudentName, string Original_Sex, string Original_Age, int Original_ClassID, System.DateTime Original_DOB) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_StuID));
             if ((Original_StudentName == null)) {
                 throw new global::System.ArgumentNullException("Original_StudentName");
@@ -3541,6 +3572,7 @@ SELECT StuID, StudentName, Sex, Age, ClassID FROM Students WHERE (StuID = @StuID
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_Age));
             }
             this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_ClassID));
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((System.DateTime)(Original_DOB));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3561,7 +3593,7 @@ SELECT StuID, StudentName, Sex, Age, ClassID FROM Students WHERE (StuID = @StuID
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string StudentName, string Sex, string Age, int ClassID) {
+        public virtual int Insert(string StudentName, string Sex, string Age, int ClassID, System.DateTime DOB) {
             if ((StudentName == null)) {
                 throw new global::System.ArgumentNullException("StudentName");
             }
@@ -3581,6 +3613,7 @@ SELECT StuID, StudentName, Sex, Age, ClassID FROM Students WHERE (StuID = @StuID
                 this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Age));
             }
             this.Adapter.InsertCommand.Parameters[3].Value = ((int)(ClassID));
+            this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(DOB));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3601,7 +3634,7 @@ SELECT StuID, StudentName, Sex, Age, ClassID FROM Students WHERE (StuID = @StuID
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string StudentName, string Sex, string Age, int ClassID, int Original_StuID, string Original_StudentName, string Original_Sex, string Original_Age, int Original_ClassID, int StuID) {
+        public virtual int Update(string StudentName, string Sex, string Age, int ClassID, System.DateTime DOB, int Original_StuID, string Original_StudentName, string Original_Sex, string Original_Age, int Original_ClassID, System.DateTime Original_DOB, int StuID) {
             if ((StudentName == null)) {
                 throw new global::System.ArgumentNullException("StudentName");
             }
@@ -3621,27 +3654,29 @@ SELECT StuID, StudentName, Sex, Age, ClassID FROM Students WHERE (StuID = @StuID
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Age));
             }
             this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(ClassID));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_StuID));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(DOB));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_StuID));
             if ((Original_StudentName == null)) {
                 throw new global::System.ArgumentNullException("Original_StudentName");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_StudentName));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_StudentName));
             }
             if ((Original_Sex == null)) {
                 throw new global::System.ArgumentNullException("Original_Sex");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_Sex));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Sex));
             }
             if ((Original_Age == null)) {
                 throw new global::System.ArgumentNullException("Original_Age");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Age));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_Age));
             }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_ClassID));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(StuID));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_ClassID));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((System.DateTime)(Original_DOB));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(StuID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3662,8 +3697,8 @@ SELECT StuID, StudentName, Sex, Age, ClassID FROM Students WHERE (StuID = @StuID
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string StudentName, string Sex, string Age, int ClassID, int Original_StuID, string Original_StudentName, string Original_Sex, string Original_Age, int Original_ClassID) {
-            return this.Update(StudentName, Sex, Age, ClassID, Original_StuID, Original_StudentName, Original_Sex, Original_Age, Original_ClassID, Original_StuID);
+        public virtual int Update(string StudentName, string Sex, string Age, int ClassID, System.DateTime DOB, int Original_StuID, string Original_StudentName, string Original_Sex, string Original_Age, int Original_ClassID, System.DateTime Original_DOB) {
+            return this.Update(StudentName, Sex, Age, ClassID, DOB, Original_StuID, Original_StudentName, Original_Sex, Original_Age, Original_ClassID, Original_DOB, Original_StuID);
         }
     }
     
